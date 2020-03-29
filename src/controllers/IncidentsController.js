@@ -43,10 +43,10 @@ module.exports = {
             const { authorization } = request.headers;
     
             //Data validate
-            if (authorization == null) response.status(400).json({ error: 'the headers.authorization be informed' })
-            if (title == null) response.status(400).json({ error: 'the title must be informed' })
-            if (description == null) response.status(400).json({ error: 'the description must be informed' })
-            if (value == null) response.status(400).json({ error: 'the value must be informed' })
+            if (authorization == null) response.status(400).json({ error: 'the [headers.authorization] be informed' })
+            if (title == null) response.status(400).json({ error: 'the [title] must be informed' })
+            if (description == null) response.status(400).json({ error: 'the [description] must be informed' })
+            if (value == null) response.status(400).json({ error: 'the [value] must be informed' })
 
             const [ id ] = await connection(tableName).insert({
                 title, 
@@ -72,7 +72,7 @@ module.exports = {
             const { authorization } = request.headers;
             
             //Data validate
-            if (authorization == null) response.status(400).json({ error: 'the headers.authorization be informed' })
+            if (authorization == null) response.status(400).json({ error: 'the [headers.authorization] be informed' })
 
             const incidentFind = await connection(tableName).where({ id })
                                                             .andWhere({ ong_id: authorization })
@@ -109,7 +109,7 @@ module.exports = {
             const { authorization } = request.headers;
 
             //Data validate
-            if (authorization == null) response.status(400).json({ error: 'the headers.authorization be informed' })
+            if (authorization == null) response.status(400).json({ error: 'the [headers.authorization] be informed' })
             
             const incidentFind = await connection(tableName).where({ id })
                                                             .andWhere({ ong_id: authorization })

@@ -28,11 +28,11 @@ module.exports = {
             const id = crypto.randomBytes(4).toString('HEX');
         
             //Data validate
-            if (name == null) response.status(400).json({ error: 'the name must be informed' })
-            if (email == null) response.status(400).json({ error: 'the email must be informed' })
-            if (whatsapp == null) response.status(400).json({ error: 'the whatsapp must be informed' })
-            if (city == null) response.status(400).json({ error: 'the name city be informed' })
-            if (uf == null) response.status(400).json({ uf: 'the name city be informed' })
+            if (name == null) response.status(400).json({ error: 'the [name] must be informed' })
+            if (email == null) response.status(400).json({ error: 'the [email] must be informed' })
+            if (whatsapp == null) response.status(400).json({ error: 'the [whatsapp] must be informed' })
+            if (city == null) response.status(400).json({ error: 'the [city] be informed' })
+            if (uf == null) response.status(400).json({ error: 'the [uf] be informed' })
 
             await connection(tableName).insert({
                 id,

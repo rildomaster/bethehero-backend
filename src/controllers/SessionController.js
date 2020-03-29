@@ -10,7 +10,7 @@ module.exports = {
             const { id } = request.body;
 
             //Data validate
-            if (id == null) response.status(400).json({ error: 'the id must be informed' })
+            if (id == null) response.status(400).json({ error: 'the [id] must be informed' })
 
             const ong = await connection(tableName).where({ id }).select('name').first();
             if (ong == null) {
