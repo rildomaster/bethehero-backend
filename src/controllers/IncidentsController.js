@@ -29,7 +29,7 @@ module.exports = {
             return response.json(result);
 
         } catch (error) {
-            return response.status(500).json({ error });
+            return response.status(500).json({ message: error });
         }
 
     },
@@ -41,12 +41,6 @@ module.exports = {
             const { title, description, value } = request.body;
             //const ong_id = request.headers.authorization;
             const { authorization } = request.headers;
-    
-            //Data validate
-            if (authorization == null) response.status(400).json({ error: 'the [headers.authorization] be informed' })
-            if (title == null) response.status(400).json({ error: 'the [title] must be informed' })
-            if (description == null) response.status(400).json({ error: 'the [description] must be informed' })
-            if (value == null) response.status(400).json({ error: 'the [value] must be informed' })
 
             const [ id ] = await connection(tableName).insert({
                 title, 
@@ -58,7 +52,7 @@ module.exports = {
             return response.json({ id });
             
         } catch (error) {
-            return response.status(500).json({ error });
+            return response.status(500).json({ message: error });
         }
 
     },
@@ -70,16 +64,12 @@ module.exports = {
             var { title, description, value } = request.body;
             const { id } = request.params;
             const { authorization } = request.headers;
-            
-            //Data validate
-            if (authorization == null) response.status(400).json({ error: 'the [headers.authorization] be informed' })
 
             const incidentFind = await connection(tableName).where({ id })
                                                             .andWhere({ ong_id: authorization })
                                                             .first();
-            
             if (incidentFind == null){
-                return response.status(404).json({ error: 'not found' });
+                return response.status(404).json({ message: 'not found' });
             }
             
             //Verificando quais campos devem ser atualizados :)
@@ -96,7 +86,7 @@ module.exports = {
             return response.status(204).send();
 
         } catch (error) {
-            return response.status(500).json({ error });
+            return response.status(500).json({ message: error });
         }
 
     },
@@ -107,16 +97,13 @@ module.exports = {
             
             const { id } = request.params;
             const { authorization } = request.headers;
-
-            //Data validate
-            if (authorization == null) response.status(400).json({ error: 'the [headers.authorization] be informed' })
             
             const incidentFind = await connection(tableName).where({ id })
                                                             .andWhere({ ong_id: authorization })
                                                             .first();
             
             if (incidentFind == null){
-                return response.status(404).json({ error: 'not found' });
+                return response.status(404).json({ message: 'not found' });
             }
     
             await connection(tableName).where({ id: incidentFind.id }).delete();
@@ -124,7 +111,7 @@ module.exports = {
             return response.status(204).send();
 
         } catch (error) {
-            return response.status(500).json({ error });
+            return response.status(500).json({ message: error });
         }
 
     }

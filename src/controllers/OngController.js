@@ -14,7 +14,7 @@ module.exports = {
             return response.json(result);
 
         } catch (error) {
-            return response.status(500).json({ error });
+            return response.status(500).json({ message: error });
         }
 
     },
@@ -26,14 +26,7 @@ module.exports = {
             //const data = request.body;
             const { name, email, whatsapp, city, uf } = request.body;
             const id = crypto.randomBytes(4).toString('HEX');
-        
-            //Data validate
-            if (name == null) response.status(400).json({ error: 'the [name] must be informed' })
-            if (email == null) response.status(400).json({ error: 'the [email] must be informed' })
-            if (whatsapp == null) response.status(400).json({ error: 'the [whatsapp] must be informed' })
-            if (city == null) response.status(400).json({ error: 'the [city] be informed' })
-            if (uf == null) response.status(400).json({ error: 'the [uf] be informed' })
-
+            
             await connection(tableName).insert({
                 id,
                 name,
@@ -46,7 +39,7 @@ module.exports = {
             return response.json({ id });
 
         } catch (error) {
-            return response.status(500).json({ error });
+            return response.status(500).json({ message: error });
         }
     },
 
@@ -59,7 +52,7 @@ module.exports = {
     
             const ongFind = await connection(tableName).where({ id }).first();
             if (ongFind == null) {
-                return response.status(404).json({ error: 'not found' });
+                return response.status(404).json({ message: 'not found' });
             }
     
             name = (name == null) ? ongFind.name : name;
@@ -79,7 +72,7 @@ module.exports = {
             return response.status(204).send();
 
         } catch (error) {
-            return response.status(500).json({ error });
+            return response.status(500).json({ message: error });
         }
 
     },
@@ -92,7 +85,7 @@ module.exports = {
     
             const ongFind = await connection(tableName).where({ id }).first();
             if (ongFind == null) {
-                return response.status(404).json({ error: 'not found' });
+                return response.status(404).json({ message: 'not found' });
             }
     
             await connection(tableName).where({ id: ongFind.id }).delete();
@@ -100,7 +93,7 @@ module.exports = {
             return response.status(204).send();
 
         } catch (error) {
-            return response.status(500).json({ error });
+            return response.status(500).json({ message: error });
         }
     }
 
