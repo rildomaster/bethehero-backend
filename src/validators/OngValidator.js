@@ -8,7 +8,7 @@ module.exports = {
                 name: Joi.string().required(),
                 email: Joi.string().required().email(),
                 whatsapp: Joi.number().required(),
-                city: Joi.string().required(),
+                city: Joi.string().required().error(new Error('cidade is required')),
                 uf: Joi.string().required().length(2)
             })
         });
