@@ -7,7 +7,7 @@ module.exports = {
             [Segments.BODY]: Joi.object().keys({
                 name: Joi.string().required(),
                 email: Joi.string().required().email(),
-                whatsapp: Joi.number().required(),
+                whatsapp: Joi.string().required(),
                 city: Joi.string().required().error(new Error('cidade is required')),
                 uf: Joi.string().required().length(2)
             })
@@ -19,7 +19,7 @@ module.exports = {
             [Segments.BODY]: Joi.object().keys({
                 name: Joi.string().allow(''),
                 email: Joi.string().allow('').email(),
-                whatsapp: Joi.number().allow(''),
+                whatsapp: Joi.string().allow(''),
                 city: Joi.string().allow(''),
                 uf: Joi.string().allow('').length(2)
             })
